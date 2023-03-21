@@ -9,7 +9,9 @@ fn main() {
     println!("{}", ref3.to_uppercase());
 }
 ```
-
+- Result: does not compile
+- Reason: due to the reassignment of s to a new value when it's borrowed by 'ref1'.
+- Fix: "ref3.to_uppercase()" -> "s.to_uppercase()"
 
 
 Example 2:
@@ -19,7 +21,9 @@ fn drip_drop() -> &String {
     return &s;
 }
 ```
-
+- Result: does not compile
+- Reason: shared reference is returned, but the owner is freed after the function returns
+- Fix: remove 2 ampersands, remove s itself
 
 
 Example 3:
@@ -32,3 +36,6 @@ fn main() {
     println!("{}", s2);
 }
 ```
+- Result: does not compile
+- Reason: v[0] implicitly moves the 1st element out of 'v' (since String does not implement 'Copy' trait), which is not allowed as it can leave 'v' in an invalid state
+- Fix: "let s2: String = v[0];" -> "let s2: &String = &v[0];"
