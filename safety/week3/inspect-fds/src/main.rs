@@ -21,7 +21,7 @@ fn main() {
     }
     let target_process = target_process.unwrap();
 
-    println!("Found process's PID: {}", target_process.pid);
+    // println!("Found process's PID: {}", target_process.pid);
 
     target_process.print();
     for child_proc in
